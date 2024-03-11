@@ -18,6 +18,16 @@ public class GestionMp3 {
         tab = new byte[128];
         tag = new TagMp3();
     }
+    public boolean estProbableFichierMP3() {
+        try (FileReader fileReader = new FileReader(fileSource.toFile());
+             BufferedReader reader = new BufferedReader(fileReader)) {
+            String firstLine = reader.readLine();
+            return firstLine != null && firstLine.startsWith("ID3");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     public void lireTags() throws IOException {
         InputStream is = Files.newInputStream(fileSource);
         DataInputStream dis = new DataInputStream(is);
@@ -37,19 +47,29 @@ public class GestionMp3 {
             tab[i]=(byte) 0x00;
         }
         for (int i = 0; i < tag.getTitre().length(); i++) {
-            tab[3+i]=(byte) tag.getTitre().charAt(i);
+            if(i<30){
+                tab[3 + i] = (byte) tag.getTitre().charAt(i);
+            }
         }
         for (int i = 0; i < tag.getArtiste().length(); i++) {
-            tab[33+i]=(byte) tag.getArtiste().charAt(i);
+            if(i<30) {
+                tab[33 + i] = (byte) tag.getArtiste().charAt(i);
+            }
         }
         for (int i = 0; i < tag.getAlbum().length(); i++) {
-            tab[63+i]=(byte) tag.getAlbum().charAt(i);
+            if(i<30){
+                tab[63+i]=(byte) tag.getAlbum().charAt(i);
+            }
         }
         for (int i = 0; i < tag.getAnnee().length(); i++) {
-            tab[93+i]=(byte) tag.getAnnee().charAt(i);
+            if(i<4){
+                tab[93+i]=(byte) tag.getAnnee().charAt(i);
+            }
         }
         for (int i = 0; i < tag.getCommentaires().length(); i++) {
-            tab[97+i]=(byte) tag.getCommentaires().charAt(i);
+            if(i<28){
+                tab[97+i]=(byte) tag.getCommentaires().charAt(i);
+                }
         }
         for (int i = 0; i < tag.getTrack(); i++) {
             tab[126] = tag.getTrack();

@@ -2,8 +2,8 @@ package com.example.demo;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,7 +13,6 @@ import javafx.scene.media.Media;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
@@ -53,7 +52,7 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isEditable = new SimpleBooleanProperty(false);
-        background = new SimpleStringProperty("-fx-background-color:#bbbbbb");
+        background = new SimpleStringProperty("-fx-background-color:#EBDEF0");
         TextTitre.editableProperty().bind(isEditable);
         TextArtiste.editableProperty().bind(isEditable);
         TextAlbum.editableProperty().bind(isEditable);
@@ -121,8 +120,8 @@ public class HelloController implements Initializable {
         buttonModifier.setDisable(false);
         TextTitre.setText(gestionMp3.getTag().getTitre());
         TextArtiste.setText(gestionMp3.getTag().getArtiste());
-        TextAlbum.setText(gestionMp3.getTag().getTitre());
-        TextAnnee.setText(gestionMp3.getTag().getTitre());
+        TextAlbum.setText(gestionMp3.getTag().getAlbum());
+        TextAnnee.setText(gestionMp3.getTag().getAnnee());
         TextCommentaire.setText(gestionMp3.getTag().getCommentaires());
         TextTrack.setText(String.valueOf(gestionMp3.getTag().getTrack()));
         TextGenre.setText(String.valueOf(gestionMp3.getTag().getGenre()));
@@ -141,6 +140,7 @@ public class HelloController implements Initializable {
         mediaPlayer.stop();
         buttonStop.setDisable(false);
         buttonStop.setDisable(true);
+        buttonPlay.setDisable(false);
     }
 
     private void ouvreChoixFichier() {
@@ -152,19 +152,45 @@ public class HelloController implements Initializable {
         if (fichierSelectionner != null){
             path = fichierSelectionner.toPath();
             labelChemin.setText(path.toAbsolutePath().toString());
-            labelFichier.setText(fichierSelectionner.getName());
-            buttonPlay.setDisable(false);
-            TextTitre.setText("");
-            TextArtiste.setText("");
-            TextAlbum.setText("");
-            TextAnnee.setText("");
-            TextCommentaire.setText("");
-            TextTrack.setText("");
-            TextGenre.setText("");
-            isEditable.setValue(Boolean.FALSE);
-            buttonLireTags.setDisable(false);
-            buttonModifier.setDisable(true);
-            buttonEnregistrer.setDisable(true);
+            gestionMp3 = new GestionMp3(fichierSelectionner.toPath());
+            if (gestionMp3.estProbableFichierMP3()) {
+                labelFichier.setText(fichierSelectionner.getName());
+                buttonPlay.setDisable(false);
+                TextTitre.setText("");
+                TextArtiste.setText("");
+                TextAlbum.setText("");
+                TextAnnee.setText("");
+                TextCommentaire.setText("");
+                TextTrack.setText("");
+                TextGenre.setText("");
+                isEditable.setValue(Boolean.FALSE);
+                background.setValue("-fx-background-color:#EBDEF0");
+                buttonLireTags.setDisable(false);
+                buttonModifier.setDisable(true);
+                buttonEnregistrer.setDisable(true);
+
+            } else {
+                afficherMessage("Ce n'est pas un fichier MP3");
+                TextTitre.setText("");
+                TextArtiste.setText("");
+                TextAlbum.setText("");
+                TextAnnee.setText("");
+                TextCommentaire.setText("");
+                TextTrack.setText("");
+                TextGenre.setText("");
+                buttonLireTags.setDisable(true);
+                buttonModifier.setDisable(true);
+                buttonEnregistrer.setDisable(true);
+                background.setValue("-fx-background-color:#EBDEF0");
+            }
         }
+    }
+
+    private void afficherMessage(String contenu) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(contenu);
+        alert.showAndWait();
     }
 }
