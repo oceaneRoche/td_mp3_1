@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600" prefWidth="524.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+    <children>
+        <Button fx:id="buttonFichier" layoutX="26.0" layoutY="44.0" prefHeight="25.0" prefWidth="91.0" text="Fichier" />
+        <Label fx:id="labelChemin" layoutX="26.0" layoutY="118.0" prefHeight="25.0" prefWidth="474.0" style="-fx-background-color: #88adc6;" text="Label">
+            <font>
+                <Font name="Arial" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="labelFichier" layoutX="26.0" layoutY="160.0" prefHeight="25.0" prefWidth="349.0" style="-fx-background-color: #88adc6;" text="Label">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+      <Button fx:id="buttonPlay" layoutX="26.0" layoutY="226.0" mnemonicParsing="false" text="play" />
+      <Button fx:id="buttonStop" layoutX="97.0" layoutY="226.0" mnemonicParsing="false" text="stop" />
+      <Button fx:id="buttonLireTags" layoutX="137.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="LireTags" />
+      <Button fx:id="buttonModifier" layoutX="249.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Modifier" />
+      <TextField fx:id="TextTitre" layoutX="34.0" layoutY="288.0" prefHeight="25.0" prefWidth="453.0" />
+      <TextField fx:id="TextArtiste" layoutX="34.0" layoutY="339.0" prefHeight="25.0" prefWidth="453.0" />
+      <TextField fx:id="TextAnnee" layoutX="34.0" layoutY="445.0" />
+      <TextField fx:id="TextCommentaire" layoutX="34.0" layoutY="487.0" prefHeight="25.0" prefWidth="453.0" />
+      <TextField fx:id="TextGenre" layoutX="34.0" layoutY="538.0" prefHeight="25.0" prefWidth="101.0" />
+      <TextField fx:id="TextTrack" layoutX="175.0" layoutY="538.0" prefHeight="25.0" prefWidth="101.0" />
+      <Label fx:id="labelTitre" layoutX="36.0" layoutY="262.0" text="Titre" />
+      <Label fx:id="labelTrack" layoutX="175.0" layoutY="512.0" text="Track" />
+      <Label fx:id="labelGenre" layoutX="34.0" layoutY="512.0" text="Genre" />
+      <Label fx:id="labelAnnee" layoutX="35.0" layoutY="428.0" text="Annee" />
+      <Label fx:id="labelArtiste" layoutX="34.0" layoutY="322.0" text="Artiste" />
+      <Label fx:id="labelAlbum" layoutX="34.0" layoutY="372.0" text="Album" />
+      <TextField fx:id="TextAlbum" layoutX="34.0" layoutY="396.0" prefHeight="25.0" prefWidth="453.0" />
+      <Label fx:id="labelCommentaire" layoutX="34.0" layoutY="470.0" text="Commentaires" />
+      <Button fx:id="buttonEnregistrer" layoutX="363.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Enregistrer" />
+    </children>
+</AnchorPane>
